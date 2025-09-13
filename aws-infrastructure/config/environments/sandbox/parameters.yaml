@@ -1,0 +1,18 @@
+# sandbox environment parameters
+environment:
+  name: "sandbox"
+  region: "us-east-1"
+  
+networking:
+  vpc_cidr: "10.0.0.0/16"
+  availability_zones: ["us-east-1a", "us-east-1b", "us-east-1c"]
+  
+compute:
+  instance_types:
+    small: "t3.small"
+    medium: "t3.medium"
+    large: "t3.large"
+    
+monitoring:
+  log_retention_days: 30
+  enable_detailed_monitoring: true

@@ -1,0 +1,60 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'VPC with public and private subnets across multiple AZs'
+
+Parameters:
+  Environment:
+    Type: String
+    Description: Environment name
+    AllowedValues: [dev, staging, prod, sandbox]
+  
+  VpcCidr:
+    Type: String
+    Description: CIDR block for VPC
+    Default: '10.0.0.0/16'
+  
+  AvailabilityZones:
+    Type: CommaDelimitedList
+    Description: List of Availability Zones
+    Default: 'us-east-1a,us-east-1b,us-east-1c'
+
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCidr
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      Tags:
+        - Key: Name
+          Value: !Sub '${Environment}-vpc'
+        - Key: Environment
+          Value: !Ref Environment
+
+  # Internet Gateway
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Sub '${Environment}-igw'
+        - Key: Environment
+          Value: !Ref Environment
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref InternetGateway
+
+Outputs:
+  VpcId:
+    Description: VPC ID
+    Value: !Ref VPC
+    Export:
+      Name: !Sub '${Environment}-vpc-id'
+  
+  VpcCidr:
+    Description: VPC CIDR block
+    Value: !Ref VpcCidr
+    Export:
+      Name: !Sub '${Environment}-vpc-cidr'

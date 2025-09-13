@@ -1,0 +1,14 @@
+# Naming conventions for AWS resources
+naming_patterns:
+  vpc: "{{ org }}-{{ env }}-vpc-{{ region }}"
+  subnet: "{{ org }}-{{ env }}-{{ type }}-{{ az }}"
+  security_group: "{{ org }}-{{ env }}-{{ service }}-sg"
+  lambda: "{{ org }}-{{ env }}-{{ function_name }}"
+  s3_bucket: "{{ org }}-{{ env }}-{{ purpose }}-{{ random }}"
+  iam_role: "{{ org }}-{{ env }}-{{ service }}-role"
+  
+abbreviations:
+  production: "prod"
+  development: "dev"
+  staging: "stg"
+  sandbox: "sbx"

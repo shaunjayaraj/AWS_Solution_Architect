@@ -1,0 +1,14 @@
+# Global tagging strategy
+default_tags:
+  Organization: "MyOrg"
+  Project: "InfrastructureAsCode"
+  Owner: "InfrastructureTeam"
+  Environment: "{{ environment }}"
+  ManagedBy: "CloudFormation"
+  CostCenter: "IT"
+  
+required_tags:
+  - Environment
+  - Project
+  - Owner
+  - CostCenter

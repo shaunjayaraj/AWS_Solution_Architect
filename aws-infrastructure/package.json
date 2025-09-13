@@ -1,0 +1,16 @@
+{
+  "name": "aws-infrastructure",
+  "version": "1.0.0",
+  "description": "AWS Infrastructure as Code with CloudFormation",
+  "scripts": {
+    "validate": "find . -name '*.yaml' -o -name '*.yml' | grep -E 'templates|infrastructure' | xargs -I {} aws cloudformation validate-template --template-body file://{}",
+    "lint": "cfn-lint templates/**/*.yaml infrastructure/**/*.yaml",
+    "test": "npm run validate && npm run lint"
+  },
+  "keywords": ["aws", "cloudformation", "infrastructure", "iac"],
+  "author": "Infrastructure Team",
+  "license": "MIT",
+  "devDependencies": {
+    "cfn-lint": "^0.24.0"
+  }
+}
